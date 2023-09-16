@@ -1,6 +1,6 @@
 {
   "name": "@anush008/tokenizers",
-  "version": "0.0.0",
+  "version": "0.2.0",
   "main": "index.js",
   "types": "index.d.ts",
   "napi": {
