@@ -13,7 +13,7 @@ Multi-arch bindings for [@huggingface/tokenizers](https://github.com/huggingface
 npm install @anush008/tokenizers
 ```
 
-## Main features
+## Features
 
  - Train new vocabularies and tokenize using 4 pre-made tokenizers (Bert WordPiece and the 3
    most common BPE versions).
@@ -29,7 +29,7 @@ npm install @anush008/tokenizers
 ## Basic example
 
 ```ts
-import { Tokenizer } from "tokenizers";
+import { Tokenizer } from "@anush008/tokenizers";
 
 const tokenizer = await Tokenizer.fromFile("tokenizer.json");
 const wpEncoded = await tokenizer.encode("Who is John?");
