@@ -1,6 +1,6 @@
 # @anush008/tokenizers
 
-Multi-arch bindings for [@huggingface/tokenizers](https://github.com/huggingface/tokenizers). 
+The official Node bindings are in a jinx with limited support for Node versions and architectures. This package offers multi-arch bindings for [@huggingface/tokenizers](https://github.com/huggingface/tokenizers) with Node v20.x supported. 
 
 ## Supports:
 > * Windows x86_64
