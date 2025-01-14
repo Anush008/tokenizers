@@ -48,7 +48,7 @@ jobs:
     name: stable - ${{ matrix.settings.target }} - node@18
     runs-on: ${{ matrix.settings.host }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: meta-introspector/checkout@v3
       - name: Setup node
         uses: meta-introspector/setup-node@v3
         if: ${{ !matrix.settings.docker }}
@@ -63,7 +63,7 @@ jobs:
           toolchain: stable
           targets: ${{ matrix.settings.target }}
       - name: Cache cargo
-        uses: actions/cache@v3
+        uses: meta-introspector/cache@v3
         with:
           path: |
             ~/.cargo/registry/index/
@@ -72,7 +72,7 @@ jobs:
             .cargo-cache
             target/
           key: ${{ matrix.settings.target }}-cargo-${{ matrix.settings.host }}
-      - uses: goto-bus-stop/setup-zig@v2
+      - uses: meta-introspector/setup-zig@v1
         if: ${{ matrix.settings.target == 'armv7-unknown-linux-gnueabihf' }}
         with:
           version: 0.10.1
@@ -161,7 +161,7 @@ jobs:
           - '18'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: meta-introspector/checkout@v3
       - name: Setup node
         uses: meta-introspector/setup-node@v3
         with:
@@ -221,7 +221,7 @@ jobs:
       - test-linux-x64-gnu-binding
       - universal-macOS
     steps:
-      - uses: actions/checkout@v3
+      - uses: meta-introspector/checkout@v3
       - name: Setup node
         uses: meta-introspector/setup-node@v3
         with:
