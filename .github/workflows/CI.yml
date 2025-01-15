@@ -48,22 +48,22 @@ jobs:
     name: stable - ${{ matrix.settings.target }} - node@18
     runs-on: ${{ matrix.settings.host }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: meta-introspector/checkout@v3
       - name: Setup node
-        uses: actions/setup-node@v3
+        uses: meta-introspector/setup-node@v3
         if: ${{ !matrix.settings.docker }}
         with:
           node-version: 18
           check-latest: true
           cache: yarn
       - name: Install
-        uses: dtolnay/rust-toolchain@stable
+        uses: meta-introspector/rust-toolchain@stable
         if: ${{ !matrix.settings.docker }}
         with:
           toolchain: stable
           targets: ${{ matrix.settings.target }}
       - name: Cache cargo
-        uses: actions/cache@v3
+        uses: meta-introspector/cache@v3
         with:
           path: |
             ~/.cargo/registry/index/
@@ -72,7 +72,7 @@ jobs:
             .cargo-cache
             target/
           key: ${{ matrix.settings.target }}-cargo-${{ matrix.settings.host }}
-      - uses: goto-bus-stop/setup-zig@v2
+      - uses: meta-introspector/setup-zig@v1
         if: ${{ matrix.settings.target == 'armv7-unknown-linux-gnueabihf' }}
         with:
           version: 0.10.1
@@ -87,7 +87,7 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Setup node x86
-        uses: actions/setup-node@v3
+        uses: meta-introspector/setup-node@v3
         if: matrix.settings.target == 'i686-pc-windows-msvc'
         with:
           node-version: 18
@@ -95,7 +95,7 @@ jobs:
           cache: yarn
           architecture: x86
       - name: Build in docker
-        uses: addnab/docker-run-action@v3
+        uses: meta-introspector/docker-run-action@v3
         if: ${{ matrix.settings.docker }}
         with:
           image: ${{ matrix.settings.docker }}
@@ -106,7 +106,7 @@ jobs:
         if: ${{ !matrix.settings.docker }}
         shell: bash
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: meta-introspector/upload-artifact@v3
         with:
           name: bindings-${{ matrix.settings.target }}
           path: ${{ env.APP_NAME }}.*.node
@@ -129,9 +129,9 @@ jobs:
           - '18'
     runs-on: ${{ matrix.settings.host }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: meta-introspector/checkout@v3
       - name: Setup node
-        uses: actions/setup-node@v3
+        uses: meta-introspector/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
           check-latest: true
@@ -139,7 +139,7 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: meta-introspector/download-artifact@v3
         with:
           name: bindings-${{ matrix.settings.target }}
           path: .
@@ -161,9 +161,9 @@ jobs:
           - '18'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: meta-introspector/checkout@v3
       - name: Setup node
-        uses: actions/setup-node@v3
+        uses: meta-introspector/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
           check-latest: true
@@ -171,7 +171,7 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: meta-introspector/download-artifact@v3
         with:
           name: bindings-x86_64-unknown-linux-gnu
           path: .
@@ -186,9 +186,9 @@ jobs:
       - build
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: meta-introspector/checkout@v3
       - name: Setup node
-        uses: actions/setup-node@v3
+        uses: meta-introspector/setup-node@v3
         with:
           node-version: 18
           check-latest: true
@@ -196,19 +196,19 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Download macOS x64 artifact
-        uses: actions/download-artifact@v3
+        uses: meta-introspector/download-artifact@v3
         with:
           name: bindings-x86_64-apple-darwin
           path: artifacts
       - name: Download macOS arm64 artifact
-        uses: actions/download-artifact@v3
+        uses: meta-introspector/download-artifact@v3
         with:
           name: bindings-aarch64-apple-darwin
           path: artifacts
       - name: Combine binaries
         run: yarn universal
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: meta-introspector/upload-artifact@v3
         with:
           name: bindings-universal-apple-darwin
           path: ${{ env.APP_NAME }}.*.node
@@ -221,9 +221,9 @@ jobs:
       - test-linux-x64-gnu-binding
       - universal-macOS
     steps:
-      - uses: actions/checkout@v3
+      - uses: meta-introspector/checkout@v3
       - name: Setup node
-        uses: actions/setup-node@v3
+        uses: meta-introspector/setup-node@v3
         with:
           node-version: 18
           check-latest: true
@@ -231,7 +231,7 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Download all artifacts
-        uses: actions/download-artifact@v3
+        uses: meta-introspector/download-artifact@v3
         with:
           path: artifacts
       - name: Move artifacts
