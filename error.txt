@@ -1,0 +1,45 @@
+> eliza@ start /app
+> pnpm --filter "@elizaos/agent" start --isRoot "--characters=characters/eliza.character.json"
+
+.                                        |  WARN  Unsupported engine: wanted: {"node":"23.3.0"} (current: {"node":"v23.6.0","pnpm":"9.14.4"})
+
+> @elizaos/agent@0.1.7 start /app/agent
+> node --loader ts-node/esm src/index.ts "--isRoot" "--characters=characters/eliza.character.json"
+
+(node:31) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("ts-node/esm", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:31) [DEP0180] DeprecationWarning: fs.Stats constructor is deprecated.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+node:internal/modules/cjs/loader:1409
+  const err = new Error(message);
+              ^
+
+Error: Cannot find module '@anush008/tokenizers-linux-arm64-gnu'
+Require stack:
+- /app/node_modules/fastembed/node_modules/.pnpm/@anush008+tokenizers@https+++codeload.github.com+meta-introspector+arm64-tokenizers+tar.gz+98_s2457qj3pe4ojcbckddasgzfvu/node_modules/@anush008/tokenizers/index.js
+- /app/node_modules/fastembed/lib/cjs/fastembed.js
+- /app/node_modules/fastembed/lib/cjs/index.js
+    at Function._resolveFilename (node:internal/modules/cjs/loader:1409:15)
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1060:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1065:22)
+    at Function._load (node:internal/modules/cjs/loader:1214:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:234:24)
+    at Module.require (node:internal/modules/cjs/loader:1495:12)
+    at require (node:internal/modules/helpers:135:16)
+    at Object.<anonymous> (/app/node_modules/fastembed/node_modules/.pnpm/@anush008+tokenizers@https+++codeload.github.com+meta-introspector+arm64-tokenizers+tar.gz+98_s2457qj3pe4ojcbckddasgzfvu/node_modules/@anush008/tokenizers/index.js:219:31)
+    at Module._compile (node:internal/modules/cjs/loader:1739:14) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/app/node_modules/fastembed/node_modules/.pnpm/@anush008+tokenizers@https+++codeload.github.com+meta-introspector+arm64-tokenizers+tar.gz+98_s2457qj3pe4ojcbckddasgzfvu/node_modules/@anush008/tokenizers/index.js',
+    '/app/node_modules/fastembed/lib/cjs/fastembed.js',
+    '/app/node_modules/fastembed/lib/cjs/index.js'
+  ]
+}
+
+Node.js v23.6.0
+/app/agent:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @elizaos/agent@0.1.7 start: `node --loader ts-node/esm src/index.ts "--isRoot" "--characters=characters/eliza.character.json"`
+Exit status 1
+ ELIFECYCLE  Command failed with exit code 1.

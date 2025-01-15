@@ -1,3 +1,11 @@
+# 
+```
+aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 767503528736.dkr.ecr.us-east-2.amazonaws.com
+docker pull 767503528736.dkr.ecr.us-east-2.amazonaws.com/nodemodules/tokenizer:latest
+docker tag 767503528736.dkr.ecr.us-east-2.amazonaws.com/nodemodules/tokenizer:latest h4ckermike/arm64-tokenizers:latest
+docker push h4ckermike/arm64-tokenizers:latest
+```
+
 # @anush008/tokenizers
 
 The official Node bindings are in a jinx with limited support for Node versions and architectures. This package offers multi-arch bindings for [@huggingface/tokenizers](https://github.com/huggingface/tokenizers) with Node v20.x supported. 
