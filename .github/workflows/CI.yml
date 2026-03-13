@@ -45,7 +45,7 @@ jobs:
             build: yarn build --target x86_64-unknown-linux-musl --zig
           - host: ubuntu-latest
             target: aarch64-unknown-linux-gnu
-            build: yarn build --target aarch64-unknown-linux-gnu --use-napi-cross
+            build: yarn build --target aarch64-unknown-linux-gnu --zig
           - host: ubuntu-latest
             target: aarch64-unknown-linux-musl
             build: yarn build --target aarch64-unknown-linux-musl --zig
@@ -82,7 +82,7 @@ jobs:
             target/
           key: ${{ matrix.settings.target }}-cargo-${{ matrix.settings.host }}
       - uses: goto-bus-stop/setup-zig@v2
-        if: ${{ contains(matrix.settings.target, 'musl') || matrix.settings.target == 'armv7-unknown-linux-gnueabihf' }}
+        if: ${{ contains(matrix.settings.target, 'musl') || matrix.settings.target == 'aarch64-unknown-linux-gnu' || matrix.settings.target == 'armv7-unknown-linux-gnueabihf' }}
         with:
           version: 0.10.1
       - name: Setup toolchain
@@ -115,7 +115,7 @@ jobs:
         if: ${{ !matrix.settings.docker }}
         shell: bash
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v7
         with:
           name: bindings-${{ matrix.settings.target }}
           path: ${{ env.APP_NAME }}.*.node
@@ -148,7 +148,7 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v8
         with:
           name: bindings-${{ matrix.settings.target }}
           path: .
@@ -180,7 +180,7 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v8
         with:
           name: bindings-x86_64-unknown-linux-gnu
           path: .
@@ -212,7 +212,7 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v8
         with:
           name: bindings-x86_64-unknown-linux-musl
           path: .
@@ -244,7 +244,7 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v8
         with:
           name: bindings-aarch64-unknown-linux-gnu
           path: .
@@ -276,7 +276,7 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v8
         with:
           name: bindings-aarch64-unknown-linux-musl
           path: .
@@ -301,19 +301,19 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Download macOS x64 artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v8
         with:
           name: bindings-x86_64-apple-darwin
           path: artifacts
       - name: Download macOS arm64 artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v8
         with:
           name: bindings-aarch64-apple-darwin
           path: artifacts
       - name: Combine binaries
         run: yarn universal
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v7
         with:
           name: bindings-universal-apple-darwin
           path: ${{ env.APP_NAME }}.*.node
@@ -339,7 +339,7 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Download all artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v8
         with:
           path: artifacts
       - name: Move artifacts
