@@ -1,0 +1,23 @@
+{
+  "name": "@anush008/tokenizers-linux-x64-musl",
+  "version": "0.0.0",
+  "os": [
+    "linux"
+  ],
+  "cpu": [
+    "x64"
+  ],
+  "main": "tokenizers.linux-x64-musl.node",
+  "files": [
+    "tokenizers.linux-x64-musl.node"
+  ],
+  "description": "Multi-arch builds of HuggingFace tokenizers",
+  "license": "MIT",
+  "engines": {
+    "node": ">= 10"
+  },
+  "repository": "https://github.com/Anush008/tokenizers",
+  "libc": [
+    "musl"
+  ]
+}
