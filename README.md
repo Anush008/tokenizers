@@ -5,6 +5,7 @@ The official Node bindings are in a jinx with limited support for Node versions 
 ## Supports:
 > * Windows x86_64
 > * Linux x86_64
+> * Linux aarch64 (glibc)
 > * MacOS aarch64/x86_64
 
 ## Installation

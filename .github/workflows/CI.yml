@@ -40,6 +40,9 @@ jobs:
               set -e &&
               yarn build --target x86_64-unknown-linux-gnu &&
               strip *.node
+          - host: ubuntu-latest
+            target: aarch64-unknown-linux-gnu
+            build: yarn build --target aarch64-unknown-linux-gnu --use-napi-cross
           - host: macos-latest
             target: aarch64-apple-darwin
             build: |
@@ -180,6 +183,38 @@ jobs:
         shell: bash
       - name: Test bindings
         run: docker run --rm -v $(pwd):/build -w /build node:${{ matrix.node }}-slim yarn test
+  test-linux-arm64-gnu-binding:
+    name: Test bindings on Linux-arm64-gnu - node@${{ matrix.node }}
+    needs:
+      - build
+    strategy:
+      fail-fast: false
+      matrix:
+        node:
+          - '14'
+          - '16'
+          - '18'
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+          check-latest: true
+          cache: yarn
+      - name: Install dependencies
+        run: yarn install
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: bindings-aarch64-unknown-linux-gnu
+          path: .
+      - name: List packages
+        run: ls -R .
+        shell: bash
+      - name: Test bindings
+        run: yarn test
   universal-macOS:
     name: Build universal macOS binary
     needs:
@@ -219,6 +254,7 @@ jobs:
     needs:
       - test-macOS-windows-binding
       - test-linux-x64-gnu-binding
+      - test-linux-arm64-gnu-binding
       - universal-macOS
     steps:
       - uses: actions/checkout@v3
