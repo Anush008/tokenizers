@@ -6,7 +6,9 @@ The official Node bindings are in a jinx with limited support for Node versions 
 > * Windows x86_64
 > * Linux x86_64 (glibc, musl/Alpine)
 > * Linux aarch64 (glibc, musl/Alpine)
-> * MacOS aarch64/x86_64
+> * macOS x86_64
+> * macOS aarch64 (Apple Silicon)
+> * macOS Universal binary
 
 ## Installation
 

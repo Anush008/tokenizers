@@ -1,6 +1,6 @@
 {
   "name": "@anush008/tokenizers-linux-arm64-gnu",
-  "version": "0.0.0",
+  "version": "0.4.0",
   "os": [
     "linux"
   ],
@@ -17,6 +17,9 @@
     "node": ">= 10"
   },
   "repository": "https://github.com/Anush008/tokenizers",
+  "publishConfig": {
+    "access": "public"
+  },
   "libc": [
     "glibc"
   ]

@@ -1,6 +1,6 @@
 {
   "name": "@anush008/tokenizers-linux-x64-musl",
-  "version": "0.0.0",
+  "version": "0.4.0",
   "os": [
     "linux"
   ],
@@ -19,5 +19,8 @@
   "repository": "https://github.com/Anush008/tokenizers",
   "libc": [
     "musl"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }

@@ -1,8 +1,11 @@
 {
   "name": "@anush008/tokenizers",
-  "version": "0.2.0",
+  "version": "0.4.0",
   "main": "index.js",
   "types": "index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
   "napi": {
     "name": "tokenizers",
     "triples": {
@@ -38,6 +41,9 @@
     "version": "napi version"
   },
   "packageManager": "yarn@3.6.3",
-  "repository": "https://github.com/Anush008/tokenizers",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anush008/tokenizers.git"
+  },
   "description": "Multi-arch builds of HuggingFace tokenizers"
 }
