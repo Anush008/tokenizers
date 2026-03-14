@@ -1,6 +1,6 @@
 {
   "name": "@anush008/tokenizers-win32-x64-msvc",
-  "version": "0.0.0",
+  "version": "0.5.0",
   "os": [
     "win32"
   ],
@@ -16,5 +16,8 @@
   "engines": {
     "node": ">= 10"
   },
-  "repository": "https://github.com/Anush008/tokenizers"
+  "repository": "https://github.com/Anush008/tokenizers",
+  "publishConfig": {
+    "access": "public"
+  }
 }

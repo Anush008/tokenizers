@@ -1,6 +1,6 @@
 {
   "name": "@anush008/tokenizers-darwin-universal",
-  "version": "0.0.0",
+  "version": "0.5.0",
   "os": [
     "darwin"
   ],
@@ -13,5 +13,8 @@
   "engines": {
     "node": ">= 10"
   },
-  "repository": "https://github.com/Anush008/tokenizers"
+  "repository": "https://github.com/Anush008/tokenizers",
+  "publishConfig": {
+    "access": "public"
+  }
 }

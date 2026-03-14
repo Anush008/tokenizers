@@ -1,6 +1,6 @@
 {
   "name": "@anush008/tokenizers-linux-arm64-musl",
-  "version": "0.0.0",
+  "version": "0.5.0",
   "os": [
     "linux"
   ],
@@ -16,8 +16,14 @@
   "engines": {
     "node": ">= 10"
   },
-  "repository": "https://github.com/Anush008/tokenizers",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anush008/tokenizers.git"
+  },
   "libc": [
     "musl"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }
