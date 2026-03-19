@@ -1,6 +1,6 @@
 {
   "name": "@anush008/tokenizers-linux-arm64-musl",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "os": [
     "linux"
   ],
