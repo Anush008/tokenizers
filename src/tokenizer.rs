@@ -208,7 +208,7 @@ impl Tokenizer {
       .tokenizer
       .write()
       .unwrap()
-      .with_pre_tokenizer((*pre_tokenizer).clone());
+      .with_pre_tokenizer(Some((*pre_tokenizer).clone()));
   }
 
   #[napi]
@@ -217,7 +217,7 @@ impl Tokenizer {
       .tokenizer
       .write()
       .unwrap()
-      .with_decoder((*decoder).clone());
+      .with_decoder(Some((*decoder).clone()));
   }
 
   #[napi]
@@ -231,7 +231,7 @@ impl Tokenizer {
       .tokenizer
       .write()
       .unwrap()
-      .with_post_processor((*post_processor).clone());
+      .with_post_processor(Some((*post_processor).clone()));
   }
 
   #[napi]
@@ -240,7 +240,7 @@ impl Tokenizer {
       .tokenizer
       .write()
       .unwrap()
-      .with_normalizer((*normalizer).clone());
+      .with_normalizer(Some((*normalizer).clone()));
   }
 
   #[napi]
@@ -251,7 +251,7 @@ impl Tokenizer {
       .read()
       .unwrap()
       .save(path, pretty)
-      .map_err(|e| Error::from_reason(format!("{}", e)))
+      .map_err(|e| Error::from_reason(format!("{e}")))
   }
 
   #[napi]
@@ -341,9 +341,7 @@ impl Tokenizer {
       PreTokenizer,
       Processor,
       Decoder,
-    > = s
-      .parse()
-      .map_err(|e| Error::from_reason(format!("{}", e)))?;
+    > = s.parse().map_err(|e| Error::from_reason(format!("{e}")))?;
     Ok(Self {
       tokenizer: Arc::new(RwLock::new(tokenizer)),
     })
@@ -352,7 +350,7 @@ impl Tokenizer {
   #[napi(factory)]
   pub fn from_file(file: String) -> Result<Self> {
     let tokenizer = tk::tokenizer::TokenizerImpl::from_file(file)
-      .map_err(|e| Error::from_reason(format!("Error loading from file{}", e)))?;
+      .map_err(|e| Error::from_reason(format!("Error loading from file{e}")))?;
     Ok(Self {
       tokenizer: Arc::new(RwLock::new(tokenizer)),
     })
@@ -472,7 +470,7 @@ impl Tokenizer {
       .write()
       .unwrap()
       .train_from_files(&mut trainer, files)
-      .map_err(|e| Error::from_reason(format!("{}", e)))?;
+      .map_err(|e| Error::from_reason(format!("{e}")))?;
     Ok(())
   }
 
@@ -504,7 +502,7 @@ impl Tokenizer {
           },
           add_special_tokens,
         )
-        .map_err(|e| Error::from_reason(format!("{}", e)))?
+        .map_err(|e| Error::from_reason(format!("{e}")))?
         .into(),
     )
   }
